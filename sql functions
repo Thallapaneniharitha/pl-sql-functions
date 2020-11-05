@@ -1,0 +1,103 @@
+create table customers(id int,name varchar(20),age int,address varchar(20),salary int);
+insert into customers values(1,'jhansi',54,'rayachoti',70000);
+1 row inserted
+select * from customers;
+ID	NAME	   AGE	ADDRESS	     SALARY
+1	jhansi	   54	rayachoti    70000
+2	rani	   64	rajampeta    57000
+3	haritha	   32	Rajampet     20000
+4	sandhay	   34	chennai	     50000
+5	ravi	   67	kapada	     37000
+6	prasanthi  34	kadapa	     40000
+
+
+1.program:
+CREATE OR REPLACE FUNCTION totalCustomers 
+RETURN number IS 
+   total number(2) := 0; 
+BEGIN 
+   SELECT count(*) into total 
+   FROM customers; 
+    
+   RETURN total; 
+END; 
+/ 
+output:
+Function created.
+
+2.program:
+DECLARE 
+   c number(2); 
+BEGIN 
+   c := totalCustomers(); 
+   dbms_output.put_line('Total no. of Customers: ' || c); 
+END; 
+/
+output:
+Total no. of Customers: 6
+PL/SQL procedure successfully completed.
+
+3.program:
+DECLARE 
+   a number; 
+   b number; 
+   c number; 
+FUNCTION findMax(x IN number, y IN number)  
+RETURN number 
+IS 
+    z number; 
+BEGIN 
+   IF x > y THEN 
+      z:= x; 
+   ELSE 
+      Z:= y; 
+   END IF;  
+   RETURN z; 
+END; 
+BEGIN 
+   a:= 34; 
+   b:= 56;  
+   c := findMax(a, b); 
+   dbms_output.put_line(' Maximum of (34,56): ' || c); 
+END; 
+/ 
+output:
+Maximum of (34,56): 56
+PL/SQL procedure successfully completed.
+
+4.program:
+DECLARE 
+   num number; 
+   factorial number;  
+   
+FUNCTION fact(x number) 
+RETURN number  
+IS 
+   f number; 
+BEGIN 
+   IF x=0 THEN 
+      f := 1; 
+   ELSE 
+      f := x * fact(x-1); 
+   END IF; 
+RETURN f; 
+END;  
+
+BEGIN 
+   num:= 4; 
+   factorial := fact(num); 
+   dbms_output.put_line(' Factorial '|| num || ' is ' || factorial); 
+END; 
+/
+output:
+ Factorial 4 is 24
+PL/SQL procedure successfully completed.
+
+
+
+
+
+
+
+
+
